@@ -51,8 +51,8 @@ p-button {
   }
 }
 
-.pie {
-  background-image: url('../assets/pie.png');
+.pier {
+  background-image: url('../assets/pier.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -68,8 +68,8 @@ p-button {
   }
 }
 
-.pie-corner {
-  background-image: url('../assets/pie-corner.png');
+.pier-corner {
+  background-image: url('../assets/pier-corner.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -98,8 +98,8 @@ p-button {
   }
 }
 
-.pie-tail {
-  background-image: url('../assets/pie-tail.png');
+.pier-tail {
+  background-image: url('../assets/pier-tail.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

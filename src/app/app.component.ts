@@ -114,7 +114,7 @@ export class AppComponent  implements OnInit {
     getirmpierStyle(place: number) {
       if (this.irmpier[0] === place) {
         const direction = this.getDirection(place, this.irmpier[1]);
-        return `pie-tail ${direction}`;
+        return `pier-tail ${direction}`;
       }
       if (this.getHead() === place) {
         const direction = this.getDirection(this.irmpier[this.irmpier.length - 2], this.getHead());
@@ -126,9 +126,9 @@ export class AppComponent  implements OnInit {
 
       const isInCorner = directionBefore != directionAfter;
       if (isInCorner) {
-        return `pie-corner ${directionBefore}-${directionAfter}`;
+        return `pier-corner ${directionBefore}-${directionAfter}`;
       }
-      return `pie ${directionAfter}`;
+      return `pier ${directionAfter}`;
     }
 
     getDirection(place: number, next: number) {
