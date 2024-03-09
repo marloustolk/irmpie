@@ -1,0 +1,117 @@
+.place {
+  text-align: center;
+  width: 6vh;
+  height: 6vh;
+  border: 1px solid #b10dbb;
+  background-color: black;
+}
+
+.test {
+  width: 6vh;
+  height: 6vh;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.board {
+  border: 1px solid b10dbb;
+  display: grid;
+  grid-template-columns: repeat(11, auto);
+  margin: auto;
+  padding: 0;
+  width: 66.2vh;
+}
+
+p-button {
+  margin-right: 6px;
+}
+
+.raisin {
+  background-image: url('../assets/raisin.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2px;
+}
+
+.irm {
+  background-image: url('../assets/irm.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &.up {
+    transform: rotate(-90deg);
+  }
+  &.down {
+    transform: rotate(90deg);
+  }
+  &.left {
+    transform: scaleX(-1);
+  }
+}
+
+.pie {
+  background-image: url('../assets/pie.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &.up {
+    transform: rotate(-90deg);
+  }
+  &.down {
+    transform: rotate(90deg);
+  }
+  &.left {
+    transform: scaleX(-1);
+  }
+}
+
+.pie-corner {
+  background-image: url('../assets/pie-corner.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  &.right-up {
+    transform: scaleY(-1);
+  }
+  &.left-up {
+    transform: rotate(180deg);
+  }
+  &.left-down {
+    transform: scaleX(-1);
+  }
+  &.up-right {
+    transform: rotate(-90deg);
+  }
+  &.up-left {
+    transform: scaleX(-1) rotate(-90deg);
+  }
+  &.down-right {
+    transform: scaleY(-1) rotate(-90deg);
+  }
+  &.down-left {
+    transform: rotate(90deg);
+  }
+}
+
+.pie-tail {
+  background-image: url('../assets/pie-tail.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+
+  &.up {
+    transform: rotate(90deg);
+  }
+  &.down {
+    transform: rotate(-90deg);
+  }
+  &.left {
+    transform: rotate(0deg);
+  }
+}

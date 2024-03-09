@@ -1,0 +1,11 @@
+@import "primeicons/primeicons.css";
+
+body {
+  background-color: #400040;
+}
+
+.p-toolbar {
+  background-color: #1c4040;
+  color: white;
+  border: 2px solid #1c4040;
+}

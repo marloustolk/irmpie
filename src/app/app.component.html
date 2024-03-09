@@ -1,0 +1,21 @@
+<p-toolbar>
+  <div>
+    <p-button (onClick)="start()">new Game</p-button>
+    <p-button (onClick)="togglePlay()">stop/resume</p-button>
+  </div>
+  <div>
+    <b style="font-size: x-large;">Irmpie</b>
+  </div>
+  <div>
+    <div><div class="test raisin"></div>{{numberOfRaisinEaten}}</div>
+  </div>
+</p-toolbar>
+<p></p>
+<!-- <p-card> -->
+  <div class="board">
+    <div *ngFor="let place of styles; let i = index" class="place"
+    [ngClass]="place"
+    ></div>
+  </div>
+<!-- </p-card> -->
+<p-dialog header="You Lost!" [(visible)]="dialogVisible"></p-dialog>
