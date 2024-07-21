@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { DirectionService } from './direction.service';
 import { StyleClassService } from './style-class.service';
 
