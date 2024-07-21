@@ -1,48 +1,44 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { DirectionService } from './direction.service';
+import { StyleClassService } from './style-class.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private interval: any;
   private raisin = 20;
   dialogVisible = false;
-  numberOfRaisinEaten = 0;
-  places: number[] = [];
+  numberOfRaisinsEaten = 0;
   styles: string[][] = [];
-  irmpier: number[] = []
+  irmpier: number[] = [];
+  lost = false;
+  header = '';
 
-  constructor(private directionService: DirectionService) { }
+  constructor(
+    private directionService: DirectionService,
+    private styleClassService: StyleClassService) { }
 
   ngOnInit(): void {
-    this.places = new Array();
-    for (let i = 0; i < 121; i++) {
-      this.places.push(i);
-    }
     this.start();
   }
 
-  togglePlay() {
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = undefined;
-    } else {
-      this.interval = setInterval(() => this.move(), 250);
-    }
-  }
-
   start() {
-    this.numberOfRaisinEaten = 0;
+    this.stop();
+    this.directionService.reset();
+
+    this.numberOfRaisinsEaten = 0;
     this.dialogVisible = false;
     this.irmpier = [56, 57, 58]
     this.setStyleClasses();
-    this.interval = setInterval(() => this.move(), 250);
+    this.interval = setInterval(() => this.move(), 300);
   }
 
   stop() {
+    this.header = 'You Lost!';
+    this.lost = true;
     this.dialogVisible = true;
     clearInterval(this.interval);
   }
@@ -53,8 +49,10 @@ export class AppComponent implements OnInit {
     if (newHead !== this.raisin) {
       this.irmpier.shift();
     } else {
-      this.numberOfRaisinEaten++;
+      this.numberOfRaisinsEaten++;
       this.placeRandomRaisin();
+      clearInterval(this.interval);
+      this.interval = setInterval(() => this.move(), 300 - 3 * this.numberOfRaisinsEaten);
     }
     this.irmpier.includes(newHead) ? this.stop() : this.irmpier.push(newHead);
     this.setStyleClasses();
@@ -85,46 +83,15 @@ export class AppComponent implements OnInit {
 
   setStyleClasses() {
     const newStyles: string[][] = [];
-    this.places.forEach(place => {
+    [...Array(121).keys()].forEach(place => {
       const placeStyle = [];
       if (this.raisin === place) {
         placeStyle.push('raisin');
       } else if (this.irmpier.includes(place)) {
-        placeStyle.push(this.getIrmpierStyle(place));
+        placeStyle.push(this.styleClassService.getIrmpierStyle(this.irmpier, this.getHead(), place));
       }
       newStyles.push(placeStyle);
     });
     this.styles = newStyles;
-  }
-
-  getIrmpierStyle(place: number) {
-    if (this.irmpier[0] === place) {
-      const direction = this.getDirectionStyleClass(place, this.irmpier[1]);
-      return `pier-tail ${direction}`;
-    }
-    if (this.getHead() === place) {
-      const direction = this.getDirectionStyleClass(this.irmpier[this.irmpier.length - 2], this.getHead());
-      return `irm ${direction}`;
-    }
-    const index = this.irmpier.indexOf(place);
-    const directionBefore = this.getDirectionStyleClass(this.irmpier[index - 1], place);
-    const directionAfter = this.getDirectionStyleClass(place, this.irmpier[index + 1]);
-
-    const isInCorner = directionBefore != directionAfter;
-    if (isInCorner) {
-      return `pier-corner ${directionBefore}-${directionAfter}`;
-    }
-    return `pier ${directionAfter}`;
-  }
-
-  getDirectionStyleClass(place: number, next: number) {
-    if (next === place + 1 || next === place - 10) {
-      return 'right';
-    } else if (next === place - 11 || next === place + 110) {
-      return 'up';
-    } else if (next === place + 11 || next === place - 110) {
-      return 'down';
-    }
-    return 'left';
   }
 }

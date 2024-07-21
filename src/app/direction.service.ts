@@ -11,7 +11,10 @@ export class DirectionService {
   private rowCount = 11;
   private touchStart: {pageX: number, pageY: number} | undefined;
 
-  constructor() { }
+  reset() {
+    this.direction = Direction.RIGHT;
+    this.directionKey = Direction.RIGHT;
+  }
 
   handleEvent(direction: string) {
     switch (direction) {
@@ -48,12 +51,12 @@ export class DirectionService {
     }
   }
 
-  isEndOfRow(head: number, direction: Direction.LEFT | Direction.RIGHT) {
+  private isEndOfRow(head: number, direction: Direction.LEFT | Direction.RIGHT) {
     const startOrEnd = direction === Direction.RIGHT ? 1 : 0;
     return ((head + startOrEnd) / this.rowCount) % 1 === 0;
   }
 
-  isEndOfColumn(head: number, direction: Direction.UP | Direction.DOWN) {
+  private isEndOfColumn(head: number, direction: Direction.UP | Direction.DOWN) {
     if (direction === Direction.UP) {
       return head < 11
     }
