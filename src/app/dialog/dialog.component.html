@@ -30,4 +30,14 @@
         <label for="name"></label>Name: <input [(ngModel)]="name" name="name" pInputText/>
         <p-button [disabled]="name === undefined" (onClick)="highscore.emit(name);dialog=dialogEnum.SCORES" icon="pi pi-star" label="save highscore"></p-button>
     </div>
+    <div *ngIf="dialog === dialogEnum.FEEDBACK">
+        <table>
+        <tr><td><label for="name"></label>Name:</td><td><input [(ngModel)]="name" name="name" pInputText/></td></tr>
+        <tr><td><label for="feedback"></label>Feedback:</td><td><textarea rows="5" [(ngModel)]="text" name="feedback"></textarea></td></tr>
+        </table>
+        <p-button [disabled]="name === undefined" (onClick)="feedback.emit({name: name, feedback: text});dialog=dialogEnum.THANKS" icon="pi pi-upload" label="send feedback"></p-button>
+    </div>
+    <div *ngIf="dialog === dialogEnum.THANKS">
+        <p>Feedback received :)</p>
+    </div>
 </p-dialog>

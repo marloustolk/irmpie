@@ -15,8 +15,16 @@ export class HighscoreService {
 
   private getUrl = 'php/get-scores.php';
   private postUrl = 'php/post-score.php';
+  private postFeedbackUrl = 'php/post-feedback.php';
 
   constructor(private http: HttpClient) {
+  }
+
+  postFeedback(name: string, feedback: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('feedback', feedback);
+    return this.http.post<any>(this.postFeedbackUrl, formData);
   }
 
   postHighScore(highscore: Highscore): Observable<any> {

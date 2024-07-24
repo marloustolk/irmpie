@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     DialogModule,
     FormsModule,
     InputTextModule,
+    InputTextareaModule,
     HttpClientModule,
     ToolbarModule,
   ],

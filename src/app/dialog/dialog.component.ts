@@ -3,9 +3,11 @@ import { Highscore } from '../highscore.service';
 
 export enum Dialog {
   ABOUT = 'About',
+  FEEDBACK = 'Send feedback',
   HIGHSCORE = 'New Highscore!',
-  SCORES = 'Highscores',
   LOST = 'You Lost!',
+  SCORES = 'Highscores',
+  THANKS = 'Thank You!',
   NONE = ''
 };
 
@@ -17,6 +19,7 @@ export class DialogComponent {
   @Output() play: EventEmitter<void> = new EventEmitter<void>();
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
   @Output() highscore: EventEmitter<string> = new EventEmitter<string>();
+  @Output() feedback: EventEmitter<{ name: string, feedback: string }> = new EventEmitter<{ name: string, feedback: string }>();
   @Input() numberOfRaisinsEaten: number = 0;
   @Input() scores: Highscore[] = [];
   @Input() set dialog(dialog: Dialog) {
@@ -29,5 +32,6 @@ export class DialogComponent {
   dialogEnum = Dialog;
   header = '';
   private _dialog = Dialog.NONE;
-  name: string| undefined = undefined;
+  name: string = '';
+  text: string = '';
 }

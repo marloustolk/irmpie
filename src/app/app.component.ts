@@ -115,9 +115,17 @@ export class AppComponent {
     });
   }
 
-  async saveHighscore(name:string) {
+  saveHighscore(name:string) {
     this.highscoreService.postHighScore({name:name, score:this.numberOfRaisinsEaten.toString()}).subscribe();
     this.getScores();
+  }
+
+  showFeedback() {
+    this.dialog = Dialog.FEEDBACK;
+  }
+
+  feedback(event: {name: string, feedback: string}) {
+    this.highscoreService.postFeedback(event.name, event.feedback).subscribe();
   }
 
   setStyleClasses() {
