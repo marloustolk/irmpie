@@ -1,8 +1,14 @@
 # Irmpier
 
-Based on the traditional snake game, in this version Irma the worm ([pier](https://www.ivn.nl/afdeling/hoogeveen/over-ons/publicaties/soort-van-de-maand/september-de-regenworm-lumbricidae/)) will try to eat as many candy-pieces ([witte chocolade rozijnen](https://www.basboernoten.nl/chocolade/witte-chocolade/biologische-witte-chocolade-rozijnen)) as she can.
+Based on the traditional snake game, in this version Irma the worm ([pier](https://www.ivn.nl/afdeling/hoogeveen/over-ons/publicaties/soort-van-de-maand/september-de-regenworm-lumbricidae/)) will try to eat as many white chocolate raisins ([witte chocolade rozijnen](https://www.basboernoten.nl/chocolade/witte-chocolade/biologische-witte-chocolade-rozijnen)) as she can.
+
+Credits for Ruben, who came up with the idea.<br /><br />
 
 <img src="./src/assets/screenshot.png" alt="screenshot" width="500"/>
+
+## How to play
+<li>browser: arrow-keys</li>
+<li>mobile: swipe gestures</li>
 
 ## Development server
 
