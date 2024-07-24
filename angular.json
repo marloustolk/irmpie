@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "irmpier:build:production"
+              "buildTarget": "irmpier:build:production"
             },
             "development": {
-              "browserTarget": "irmpier:build:development"
+              "buildTarget": "irmpier:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "irmpier:build"
+            "buildTarget": "irmpier:build"
           }
         },
         "test": {
