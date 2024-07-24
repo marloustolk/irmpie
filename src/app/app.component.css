@@ -51,6 +51,9 @@
 
 p-button {
   margin-right: 6px;
+  margin-top: 6px;
+  display: inline-grid;
+  width: 140px;
 }
 
 .raisin {
