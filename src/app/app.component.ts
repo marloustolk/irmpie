@@ -1,6 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { DirectionService } from './direction.service';
 import { StyleClassService } from './style-class.service';
+import { Highscore, HighscoreService } from './highscore.service';
+import { first } from 'rxjs';
+import { Dialog } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +13,15 @@ import { StyleClassService } from './style-class.service';
 export class AppComponent {
   private interval: any;
   private raisin = 20;
-  dialogVisible = false;
+  dialog = Dialog.NONE;
   numberOfRaisinsEaten = 0;
+  scores: Highscore[] = [];
   styles: string[][] = [];
   irmpier: number[] = [];
-  lost = false;
-  header = '';
 
   constructor(
     private directionService: DirectionService,
+    private highscoreService: HighscoreService,
     private styleClassService: StyleClassService) { }
 
   ngOnInit(): void {
@@ -30,16 +33,27 @@ export class AppComponent {
     this.directionService.reset();
 
     this.numberOfRaisinsEaten = 0;
-    this.dialogVisible = false;
+    this.dialog = Dialog.NONE;
     this.irmpier = [56, 57, 58]
     this.setStyleClasses();
     this.interval = setInterval(() => this.move(), 300);
   }
 
+  closeDialog() {
+    this.dialog = Dialog.NONE;
+  }
+
+  about() {
+    this.dialog = Dialog.ABOUT;
+  }
+
   stop() {
-    this.header = 'You Lost!';
-    this.lost = true;
-    this.dialogVisible = true;
+    clearInterval(this.interval);
+    if (this.numberOfRaisinsEaten > 0 && this.isHighScore()) {
+      this.dialog = Dialog.HIGHSCORE;
+    } else {
+      this.dialog = Dialog.LOST;
+    }
     clearInterval(this.interval);
   }
 
@@ -79,6 +93,31 @@ export class AppComponent {
     } else {
       this.directionService.handleEvent((event as KeyboardEvent).key);
     }
+  }
+
+  isHighScore() {
+    this.getScores();
+    if (this.scores.length < 10) {
+      return true;
+    }
+    const lowestHighscore = this.scores[this.scores.length - 1].score;
+    return this.numberOfRaisinsEaten > parseInt(lowestHighscore);
+  }
+
+  showScores() {
+    this.getScores();
+    this.dialog = Dialog.SCORES;
+  }
+
+  getScores() {
+    this.highscoreService.getHighScores().pipe(first()).subscribe(scores => {
+      this.scores = scores.sort((a,b) => parseInt(b.score) - parseInt(a.score)).slice(0, 10);
+    });
+  }
+
+  async saveHighscore(name:string) {
+    this.highscoreService.postHighScore({name:name, score:this.numberOfRaisinsEaten.toString()}).subscribe();
+    this.getScores();
   }
 
   setStyleClasses() {

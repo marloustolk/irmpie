@@ -1,0 +1,33 @@
+<p-dialog [header]="header" (onHide)="close.emit()" [(visible)]="dialogVisible" [style]="{ width: '25rem' }">
+    <div *ngIf="dialog === dialogEnum.ABOUT">
+        <p>Based on the traditional snake game, in this version Irma the worm (<a
+                href="https://www.ivn.nl/afdeling/hoogeveen/over-ons/publicaties/soort-van-de-maand/september-de-regenworm-lumbricidae/"
+                target="_blank">pier</a>) will try to eat as many white chocolate raisins <a
+                href="https://www.basboernoten.nl/chocolade/witte-chocolade/biologische-witte-chocolade-rozijnen"
+                target="_blank">(witte chocolade rozijnen)</a> as she can.<br /><br />
+            Credits for Ruben, who came up with the idea.<br /><br />
+            <strong>How to play</strong><br />
+            <li>browser: arrow-keys</li>
+            <li>mobile: swipe gestures</li>
+        </p>
+        <a href="https://github.com/marloustolk" target="_blank">
+            <p [style]="{ textAlign: 'end' }"><i class="pi pi-github"></i>Marlou Stolk</p>
+        </a>
+    </div>
+    <div *ngIf="dialog === dialogEnum.LOST">
+        <p>Irmpier ate {{numberOfRaisinsEaten}} raisins.</p>
+        <p-button (onClick)="play.emit()" icon="pi pi-caret-right" label="play again"></p-button>
+    </div>
+    <div *ngIf="dialog === dialogEnum.SCORES">
+        
+            <table [ngStyle]="{'width' : '100%' }">
+                <tr *ngFor="let item of scores; index as i">
+                    <td>{{i + 1}}</td><td>{{item.name}}</td><td>{{item.score}}</td>
+                </tr>
+            </table>
+    </div>
+    <div *ngIf="dialog === dialogEnum.HIGHSCORE">
+        <label for="name"></label>Name: <input [(ngModel)]="name" name="name" pInputText/>
+        <p-button [disabled]="name === undefined" (onClick)="highscore.emit(name);dialog=dialogEnum.SCORES" icon="pi pi-star" label="save highscore"></p-button>
+    </div>
+</p-dialog>

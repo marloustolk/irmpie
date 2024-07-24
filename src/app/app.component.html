@@ -1,8 +1,8 @@
 <p-toolbar>
   <div>
     <p-button (onClick)="start()" icon="pi pi-caret-right" label="play"></p-button>
-    <p-button (onClick)="header = 'About'; lost = false; dialogVisible = true" icon="pi pi-info-circle"
-      label="about"></p-button>
+    <p-button (onClick)="about()" icon="pi pi-info-circle" label="about"></p-button>
+    <p-button (onClick)="showScores()" icon="pi pi-star-fill" label="highscores"></p-button>
   </div>
   <div>
     <b style="font-size: x-large;">Irmpier</b>
@@ -17,24 +17,11 @@
 <div class="board">
   <div *ngFor="let place of styles; let i = index" class="place" [ngClass]="place"></div>
 </div>
-<p-dialog [header]="header" [(visible)]="dialogVisible" [style]="{ width: '25rem' }">
-  <div *ngIf="lost === false">
-    <p>Based on the traditional snake game, in this version Irma the worm (<a
-        href="https://www.ivn.nl/afdeling/hoogeveen/over-ons/publicaties/soort-van-de-maand/september-de-regenworm-lumbricidae/"
-        target="_blank">pier</a>) will try to eat as many candy-pieces <a
-        href="https://www.basboernoten.nl/chocolade/witte-chocolade/biologische-witte-chocolade-rozijnen"
-        target="_blank">(witte chocolade rozijnen)</a> as she can.<br /><br />
-      Credits for Ruben, who came up with the idea.<br /><br />
-      <strong>How to play</strong><br />
-      <li>browser: arrow-keys</li>
-      <li>mobile: swipe gestures</li>
-    </p>
-    <a href="https://github.com/marloustolk" target="_blank">
-      <p [style]="{ textAlign: 'end' }"><i class="pi pi-github"></i>Marlou Stolk</p>
-    </a>
-  </div>
-  <div *ngIf="lost === true">
-    <p>Irmpier ate {{numberOfRaisinsEaten}} raisins.</p>
-    <p-button (onClick)="start()" icon="pi pi-caret-right" label="play again"></p-button>
-  </div>
-</p-dialog>
+<app-dialog
+  (close)="closeDialog()"
+  (play)="start()"
+  (highscore)="saveHighscore($event)"
+  [numberOfRaisinsEaten]="numberOfRaisinsEaten"
+  [scores]="scores"
+  [dialog]="dialog"
+></app-dialog>
