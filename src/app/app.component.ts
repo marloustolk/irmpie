@@ -77,10 +77,11 @@ export class AppComponent {
   }
 
   placeRandomRaisin() {
-        let newPlace = this.raisin;
+    const oldPlace = this.raisin;
+    let newPlace = this.raisin;
     do {
       newPlace = Math.floor(Math.random() * (120 - 0 + 1) + 0)
-    } while (this.irmpier.includes(newPlace))
+    } while (this.irmpier.includes(newPlace) || newPlace === oldPlace)
     this.raisin = newPlace;
   }
 
