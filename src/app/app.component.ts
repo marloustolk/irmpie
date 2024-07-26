@@ -77,7 +77,7 @@ export class AppComponent {
   }
 
   placeRandomRaisin() {
-    let newPlace = this.raisin;
+        let newPlace = this.raisin;
     do {
       newPlace = Math.floor(Math.random() * (120 - 0 + 1) + 0)
     } while (this.irmpier.includes(newPlace))
@@ -88,8 +88,8 @@ export class AppComponent {
   @HostListener('touchstart', ['$event'])
   @HostListener('touchmove', ['$event'])
   listen(event: Event) {
-    if (event instanceof TouchEvent) {
-      this.directionService.handleTouchEvent(event);
+    if ('touches' in event) {
+      this.directionService.handleTouchEvent(event as TouchEvent);
     } else {
       this.directionService.handleEvent((event as KeyboardEvent).key);
     }
