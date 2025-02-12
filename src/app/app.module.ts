@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,25 +15,18 @@ import { DialogComponent } from './dialog/dialog.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    DialogComponent
-  ],
-  imports: [
-    ButtonModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CardModule,
-    CommonModule,
-    DialogModule,
-    FormsModule,
-    InputTextModule,
-    InputTextareaModule,
-    HttpClientModule,
-    ToolbarModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        DialogComponent
+    ],
+    bootstrap: [AppComponent], imports: [ButtonModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        CardModule,
+        CommonModule,
+        DialogModule,
+        FormsModule,
+        InputTextModule,
+        InputTextareaModule,
+        ToolbarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

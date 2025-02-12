@@ -28,6 +28,10 @@ export class AppComponent {
     this.start();
   }
 
+  home() {
+    window.location.href = 'https://epibratie.nl';
+  }
+
   start() {
     this.stop();
     this.directionService.reset();
